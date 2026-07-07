@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAFEIN - 피그마 디자인 구현</title>
+    <!-- 구글 폰트 로드 -->
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Unbounded', sans-serif;
+        }
+
+        /* 배너 컨테이너 */
+        .banner {
+            width: 1440px; /* 피그마 기준 너비 (추정) */
+            height: 500px;
+            background-color: #000000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 장식 박스들 */
+        .decoration {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .bottom-box {
+            position: absolute;
+            background-color: #000000;
+            border: 1px solid #000000;
+            height: 107px;
+            width: 735px;
+            left: calc(16.67% + 132px);
+            bottom: 40px; /* 피그마 좌표 기반 조정 */
+            z-index: 1;
+        }
+
+        .right-box {
+            position: absolute;
+            border: 1px solid #000000;
+            height: 420px;
+            width: 343px;
+            left: calc(75% - 8px);
+            top: 40px;
+            z-index: 1;
+        }
+
+        .left-box {
+            position: absolute;
+            border: 1px solid #000000;
+            height: 420px;
+            width: 343px; /* Right Box와 대칭 기준 */
+            left: 2.67%;
+            top: 40px;
+            z-index: 1;
+        }
+
+        .top-box {
+            position: absolute;
+            background-color: #a86e3c;
+            border: 1px solid #000000;
+            height: 314px;
+            width: 736px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 40px;
+            z-index: 1;
+        }
+
+        /* 중앙 텍스트 영역 */
+        .content-text {
+            position: absolute;
+            left: 50%;
+            top: 196px;
+            transform: translateX(-50%);
+            width: 654px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .title {
+            font-weight: 800;
+            font-size: 81px;
+            line-height: 0.9;
+            color: #000000;
+            margin-bottom: 20px;
+            letter-spacing: -2.4px;
+        }
+
+        .subtitle {
+            font-weight: 800;
+            font-size: 40px;
+            line-height: 0.9;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .eng-title {
+            font-weight: 800;
+            font-size: 28px;
+            line-height: 0.9;
+            color: #000000;
+        }
+
+        /* 하단 이벤트 텍스트 */
+        .event-text {
+            position: absolute;
+            left: 50%;
+            bottom: 60px;
+            transform: translateX(-50%);
+            width: 654px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 55px;
+            line-height: 0.9;
+            color: #ffffff;
+            letter-spacing: 2.75px;
+            z-index: 10;
+        }
+
+        /* 시간 및 정보 텍스트 */
+        .info-left {
+            position: absolute;
+            left: 211px;
+            top: 250px;
+            transform: translate(-50%, -50%);
+            font-family: 'DM Mono', monospace;
+            font-weight: 500;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.5); /* 피그마에 투명도가 있는 것으로 보임 */
+            letter-spacing: 1.2px;
+            z-index: 10;
+        }
+
+        .info-right {
+            position: absolute;
+            right: 140px; /* calc(75%+164px) 기준 조정 */
+            top: 250px;
+            transform: translate(50%, -50%);
+            font-family: 'DM Mono', monospace;
+            font-weight: 500;
+            font-size: 24px;
+            color: #ffffff;
+            letter-spacing: 1.2px;
+            z-index: 10;
+        }
+
+        /* 이미지 영역 */
+        .image-rectangle {
+            position: absolute;
+            width: 342px;
+            height: 420px;
+            top: 40px;
+            background-color: #d9d9d9;
+            overflow: hidden;
+            z-index: 5;
+        }
+
+        .img-left {
+            left: 40px;
+        }
+
+        .img-right {
+            left: calc(75% - 8px);
+        }
+
+        .image-rectangle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <!-- 배경 장식 -->
+        <div class="decoration">
+            <div class="top-box"></div>
+            <div class="bottom-box"></div>
+            <div class="left-box"></div>
+            <div class="right-box"></div>
+        </div>
+
+        <!-- 이미지 영역 -->
+        <div class="image-rectangle img-left">
+            <img src="https://www.figma.com/api/mcp/asset/aad00178-c973-4e55-b061-bb75701b532a" alt="Cafe Image Left">
+        </div>
+        <div class="image-rectangle img-right">
+            <img src="https://www.figma.com/api/mcp/asset/c9a3135c-2df8-41dd-9837-6c4819f595b2" alt="Cafe Image Right">
+        </div>
+
+        <!-- 텍스트 컨텐츠 -->
+        <div class="content-text">
+            <h1 class="title">CAFEIN</h1>
+            <p class="subtitle">매일 마주하는 작은 휴식</p>
+            <p class="eng-title">Your Daily Escape</p>
+        </div>
+
+        <div class="info-left">8AM-2PM</div>
+        <div class="info-right">OPEN EVERY DAY</div>
+
+        <div class="event-text">
+            오픈기념 아아 1000원
+        </div>
+    </div>
+
+</body>
+</html>

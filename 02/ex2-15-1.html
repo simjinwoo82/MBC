@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1. 모든 링크의 기본 상태 (밑줄 제거) */
+        a {
+            text-decoration: none;
+        }
+        
+        /* 2. 아직 방문하지 않은 링크 */
+        a:link {
+            color: blue; /* 기본 파란색 유지 혹은 원하는 색상 */
+        }
+        
+        /* 3. 방문했던 링크 */
+        a:visited {
+            color: green;
+        }
+        
+        /* 4. 마우스를 올렸을 때 */
+        a:hover {
+            background-color: black;
+            color: white;
+            text-decoration: underline; /* 마우스 올렸을 때만 밑줄 표시 (선택사항) */
+        }
+        
+        /* 5. 클릭하는 순간 */
+        a:active {
+            color: red;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="#COMPANY">COMPANY</a></li>
+        <li><a href="#PRODUCT">PRODUCT</a></li>
+        <li><a href="#SERVICE">SERVICE</a></li>
+        <li><a href="#CUSTOMER">CUSTOMER</a></li>
+        <li><a href="#COMMUNITY">COMMUNITY</a></li>
+    </ul>
+</body>
+</html>

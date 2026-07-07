@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 식탁 | 프리미엄 레시피 60종</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Sans-serif&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Serif KR', serif; color: #333; background-color: #FCFBF9; line-height: 1.6; }
+        header { display: flex; justify-content: center; align-items: center; padding: 40px 0; background-color: #FCFBF9; border-bottom: 1px solid #EFEBE4; }
+        .logo { font-size: 32px; font-weight: 700; color: #5C6E58; letter-spacing: -1px; }
+
+        .category-tabs { display: flex; justify-content: center; gap: 10px; margin: 30px 0; flex-wrap: wrap; padding: 0 20px; }
+        .tab-btn { font-family: sans-serif; padding: 10px 18px; border: 1px solid #EFEBE4; background: #fff; border-radius: 30px; cursor: pointer; transition: 0.3s; color: #666; font-weight: bold; font-size: 14px; }
+        .tab-btn.active, .tab-btn:hover { background: #5C6E58; color: #fff; border-color: #5C6E58; }
+
+        .container { max-width: 1200px; margin: 0 auto 100px; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+
+        .card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #F0EFEA; cursor: pointer; transition: 0.3s; display: block; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .card-img { height: 220px; background-size: cover; background-position: center; transition: 0.5s; background-color: #eee; }
+        .card-content { padding: 20px; }
+        .card-tag { font-size: 11px; color: #A39683; letter-spacing: 1px; margin-bottom: 5px; display: block; text-transform: uppercase; }
+        .card-title { font-size: 19px; margin-bottom: 8px; color: #222; }
+        .card-desc { font-size: 14px; color: #777; font-family: sans-serif; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* 모달 스타일 */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: #fff; max-width: 700px; width: 100%; max-height: 90vh; border-radius: 15px; overflow-y: auto; position: relative; }
+        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 35px; color: #fff; cursor: pointer; text-shadow: 0 2px 4px rgba(0,0,0,0.5); z-index: 10; }
+        .modal-img { height: 350px; background-size: cover; background-position: center; }
+        .modal-body { padding: 40px; }
+        .modal-title { font-size: 28px; margin-bottom: 15px; }
+        .modal-section { margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; }
+        .modal-subtitle { font-size: 18px; color: #5C6E58; font-weight: bold; margin-bottom: 10px; }
+        .modal-text { font-family: sans-serif; white-space: pre-line; color: #444; line-height: 1.8; }
+
+        footer { background: #F3F1EC; padding: 50px 20px; text-align: center; border-top: 1px solid #EFEBE4; }
+        footer p { font-size: 13px; color: #999; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">오늘의 식탁</div>
+</header>
+
+<div class="category-tabs">
+    <button class="tab-btn active" onclick="filterMenu('all', event)">전체보기 (60)</button>
+    <button class="tab-btn" onclick="filterMenu('korean', event)">한식</button>
+    <button class="tab-btn" onclick="filterMenu('chinese', event)">중식</button>
+    <button class="tab-btn" onclick="filterMenu('japanese', event)">일식</button>
+    <button class="tab-btn" onclick="filterMenu('bakery-b', event)">제빵</button>
+    <button class="tab-btn" onclick="filterMenu('bakery-c', event)">제과</button>
+    <button class="tab-btn" onclick="filterMenu('coffee', event)">커피</button>
+</div>
+
+<main class="container">
+    <div class="grid" id="menu-grid"></div>
+</main>
+
+<div class="modal" id="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+        <span class="modal-close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
+        <div class="modal-img" id="m-img"></div>
+        <div class="modal-body">
+            <h2 class="modal-title" id="m-title"></h2>
+            <div class="modal-section">
+                <div class="modal-subtitle">준비물</div>
+                <p class="modal-text" id="m-ing"></p>
+            </div>
+            <div class="modal-section">
+                <div class="modal-subtitle">레시피</div>
+                <p class="modal-text" id="m-step"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 오늘의 식탁. 저작권 없는 무료 이미지(Unsplash)와 오픈소스 코드로 제작되었습니다.</p>
+</footer>
+
+<script>
+const recipes = [
+    // === 1. 한식 (Korean) 베스트 10 ===
+    { id: 1, cat: 'korean', tag: 'Korean Classic', title: '불고기', desc: '달콤 짭조름한 양념에 재워 부드럽게 즐기는 한국의 대표 고기 요리.', img: 'https://images.unsplash.com/photo-1617470703128-26a0fc9af10f?w=600', ing: '소고기 불고기감 600g, 양파 1/2개, 대파 1대, 간장 6큰술, 설탕 3큰술, 다진 마늘 1큰술, 참기름', step: '1. 키친타월로 소고기의 핏물을 제거합니다.\n2. 분량의 간장, 설탕, 마늘, 참기름을 섞어 양념장을 만듭니다.\n3. 고기와 썰어둔 야채를 양념장에 버무려 30분간 재웁니다.\n4. 달궈진 팬에 강불로 빠르게 볶아냅니다.' },
+    { id: 2, cat: 'korean', tag: 'Korean Classic', title: '김치찌개', desc: '잘 익은 김치와 돼지고기가 어우러진 깊고 진한 맛의 밥도둑 찌개.', img: 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=600', ing: '신김치 1/4포기, 돼지고기 찌개용 200g, 두부 1/2모, 대파 1/2대, 고춧가루 1큰술, 국간장 1큰술', step: '1. 냄비에 돼지고기를 넣고 겉면이 익을 때까지 볶습니다.\n2. 신김치를 먹기 좋은 크기로 썰어 함께 볶아줍니다.\n3. 물이나 쌀뜨물을 자작하게 붓고 푹 끓입니다.\n4. 고춧가루, 국간장으로 간을 하고 두부와 대파를 올려 마무리합니다.' },
+    { id: 3, cat: 'korean', tag: 'Korean Classic', title: '비빔밥', desc: '오색 빛깔 신선한 나물과 고소한 약고추장이 만드는 건강한 조화.', img: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600', ing: '밥 1공기, 소고기 다진것, 콩나물, 시금치, 당근, 애호박, 달걀 1개, 고추장, 참기름', step: '1. 준비한 채소들을 각각 채 썰어 팬에 소금을 살짝 치고 볶아냅니다.\n2. 콩나물과 시금치는 데쳐서 참기름, 소금에 무칩니다.\n3. 그릇에 밥을 담고 준비한 나물들을 보기 좋게 둘러 담습니다.\n4. 달걀프라이를 올리고 고추장과 참기름을 곁들입니다.' },
+    { id: 4, cat: 'korean', tag: 'Korean Classic', title: '떡볶이', desc: '매콤달콤한 소스에 쫄깃한 떡과 어묵이 어우러진 국민 간식.', img: 'https://images.unsplash.com/photo-1626804475315-9644b37a2f4b?w=600', ing: '떡볶이 떡 300g, 사각어묵 2장, 양배추 조금, 대파 1대, 고추장 2큰술, 고춧가루 1큰술, 설탕 2큰술', step: '

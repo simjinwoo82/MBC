@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Google Antigravity CLI(agy) 주요 커맨드 명령어 가이드 - 터미널 기반 AI 에이전트 인터페이스의 모든 명령어를 한눈에">
+  <title>Antigravity CLI 커맨드 가이드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0e1a;
+      --bg-secondary: #111827;
+      --bg-card: rgba(17, 24, 39, 0.7);
+      --bg-card-hover: rgba(30, 41, 59, 0.8);
+      --border-glass: rgba(99, 102, 241, 0.15);
+      --border-glass-hover: rgba(129, 140, 248, 0.35);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-indigo: #818cf8;
+      --accent-violet: #a78bfa;
+      --accent-cyan: #22d3ee;
+      --accent-emerald: #34d399;
+      --accent-rose: #fb7185;
+      --accent-amber: #fbbf24;
+      --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-card: linear-gradient(145deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+      --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 배경 그라데이션 오브 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+      animation: floatOrb 20s ease-in-out infinite;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -200px;
+      left: -200px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+      animation: floatOrb 25s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(60px, -40px); }
+      66% { transform: translate(-30px, 50px); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.1); }
+      50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.25); }
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      padding: 80px 0 60px;
+      text-align: center;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-indigo);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .logo-badge::before {
+      content: '⬡';
+      font-size: 1rem;
+    }
+
+    header h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #e0e7ff 0%, #818cf8 40%, #a78bfa 70%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    header p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      font-weight: 300;
+    }
+
+    .terminal-preview {
+      display: inline-block;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 16px 32px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      color: var(--accent-emerald);
+      box-shadow: var(--shadow-card);
+    }
+
+    .terminal-preview .prompt {
+      color: var(--accent-indigo);
+    }
+
+    .terminal-preview .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 18px;
+      background: var(--accent-emerald);
+      vertical-align: text-bottom;
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+    }
+
+    /* ===== 네비게이션 (카테고리 필터) ===== */
+    .category-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .category-btn {
+      padding: 8px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--accent-indigo);
+      color: var(--accent-indigo);
+      transform: translateY(-1px);
+    }
+
+    .category-btn.active {
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.2);
+    }
+
+    /* ===== 섹션 제목 ===== */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 48px 0 24px;
+      animation: slideInLeft 0.6s ease-out;
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .section-title h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      padding-left: 54px;
+    }
+
+    /* ===== 커맨드 카드 ===== */
+    .commands-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .cmd-card {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 24px;
+      background: var(--gradient-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeInUp 0.5s ease-out both;
+    }
+
+    .cmd-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-glass-hover);
+      transform: translateX(6px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .cmd-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      background: rgba(34, 211, 238, 0.08);
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(34, 211, 238, 0.15);
+      white-space: nowrap;
+      width: fit-content;
+      transition: all 0.3s ease;
+    }
+
+    .cmd-card:hover .cmd-name {
+      background: rgba(34, 211, 238, 0.15);
+      border-color: rgba(34, 211, 238, 0.3);
+    }
+
+    .cmd-desc {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    /* ===== 키보드 단축키 섹션 ===== */
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .shortcut-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      background: var(--gradient-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.5s ease-out both;
+    }
+
+    .shortcut-card:hover {
+      border-color: var(--border-glass-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    kbd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-amber);
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      padding: 5px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    .shortcut-card .desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* ===== 설정 테이블 ===== */
+    .settings-table-wrapper {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border-glass);
+      background: var(--gradient-card);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 32px;
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    .settings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .settings-table thead {
+      background: rgba(99, 102, 241, 0.08);
+    }
+
+    .settings-table th {
+      padding: 14px 20px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--accent-indigo);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .settings-table td {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(99, 102, 241, 0.06);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+
+    .settings-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .settings-table tr:hover td {
+      background: rgba(99, 102, 241, 0.04);
+    }
+
+    .settings-table .key-col {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-violet);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .settings-table .type-col {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-emerald);
+      font-size: 0.82rem;
+    }
+
+    .settings-table .default-col {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    /* ===== 색상별 아이콘 배경 ===== */
+    .icon-indigo { background: rgba(99, 102, 241, 0.15); color: var(--accent-indigo); }
+    .icon-cyan { background: rgba(34, 211, 238, 0.15); color: var(--accent-cyan); }
+    .icon-emerald { background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald); }
+    .icon-rose { background: rgba(251, 113, 133, 0.15); color: var(--accent-rose); }
+    .icon-amber { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); }
+    .icon-violet { background: rgba(167, 139, 250, 0.15); color: var(--accent-violet); }
+
+    /* ===== 푸터 ===== */
+    footer {
+      text-align: center;
+      padding: 60px 0 40px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-glass);
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: var(--accent-indigo);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--accent-violet);
+    }
+
+    /* ===== 검색 바 ===== */
+    .search-wrapper {
+      max-width: 480px;
+      margin: 0 auto 40px;
+      position: relative;
+      animation: fadeInUp 0.8s ease-out 0.1s both;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 20px 14px 48px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-indigo);
+      box-shadow: 0 0 24px rgba(99, 102, 241, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    /* ===== 반응형 ===== */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2rem; }
+      header { padding: 50px 0 40px; }
+      .cmd-card { grid-template-columns: 1fr; gap: 8px; padding: 14px 18px; }
+      .section-desc { padding-left: 0; }
+      .shortcut-grid { grid-template-columns: 1fr; }
+      .settings-table { font-size: 0.8rem; }
+      .settings-table th, .settings-table td { padding: 10px 12px; }
+    }
+
+    /* 스크롤바 커스텀 */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.5); }
+
+    /* 숨김 처리 */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- ===== 헤더 ===== -->
+    <header>
+      <div class="logo-badge">Google Antigravity CLI</div>
+      <h1>커맨드 명령어 가이드</h1>
+      <p>터미널 기반 AI 에이전트 인터페이스 <code style="color: var(--accent-cyan);">agy</code>의 모든 명령어를 한눈에 살펴보세요.</p>
+      <div class="terminal-preview">
+        <span class="prompt">❯</span> agy<span class="cursor"></span>
+      </div>
+    </header>
+
+    <!-- ===== 검색 ===== -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="명령어 검색... (예: /model, diff, config)">
+    </div>
+
+    <!-- ===== 카테고리 필터 ===== -->
+    <div class="category-nav">
+      <button class="category-btn active" data-cat="all">전체</button>
+      <button class="category-btn" data-cat="session">세션 관리</button>
+      <button class="category-btn" data-cat="workspace">워크스페이스</button>
+      <button class="category-btn" data-cat="agent">에이전트 / 도구</button>
+      <button class="category-btn" data-cat="ui">화면 / UI</button>
+      <button class="category-btn" data-cat="shortcut">키보드 단축키</button>
+      <button class="category-btn" data-cat="settings">설정 (settings.json)</button>
+    </div>
+
+    <div id="noResults" class="no-results">😅 검색 결과가 없습니다.</div>
+
+    <!-- ===== 1. 세션 관리 ===== -->
+    <section class="cmd-section" data-category="session">
+      <div class="section-title">
+        <div class="section-icon icon-indigo">🚀</div>
+        <h2>세션 관리</h2>
+      </div>
+      <p class="section-desc">대화 세션의 시작, 종료, 전환, 분기 등을 관리하는 명령어입니다.</p>
+      <div class="commands-grid">
+        <div class="cmd-card" data-search="/exit /quit 종료 세션">
+          <span class="cmd-name">/exit · /quit</span>
+          <span class="cmd-desc">현재 Antigravity CLI 세션을 종료합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/resume /switch /conversation 대화 전환 재개">
+          <span class="cmd-name">/resume · /switch · /conversation</span>
+          <span class="cmd-desc">이전 대화 스레드를 ID 또는 이름으로 검색해 재개합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/fork /branch 포크 분기 브랜치">
+          <span class="cmd-name">/fork · /branch</span>
+          <span class="cmd-desc">현재 대화를 히스토리를 유지한 채 새 스레드로 분기합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/rename 이름변경 제목">
+          <span class="cmd-name">/rename</span>
+          <span class="cmd-desc">활성 대화 스레드의 이름을 변경합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/rewind /undo 되돌리기 실행취소">
+          <span class="cmd-name">/rewind · /undo</span>
+          <span class="cmd-desc">대화 히스토리를 이전 체크포인트로 되돌립니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/clear /new 초기화 지우기 새대화">
+          <span class="cmd-name">/clear · /new</span>
+          <span class="cmd-desc">터미널 화면과 스크롤백 버퍼를 초기화합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/logout 로그아웃 계정">
+          <span class="cmd-name">/logout</span>
+          <span class="cmd-desc">현재 Google 계정 세션에서 로그아웃합니다.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. 워크스페이스 ===== -->
+    <section class="cmd-section" data-category="workspace">
+      <div class="section-title">
+        <div class="section-icon icon-cyan">📁</div>
+        <h2>워크스페이스 & 코드</h2>
+      </div>
+      <p class="section-desc">프로젝트 디렉터리, 파일, 코드 변경 사항을 관리하는 명령어입니다.</p>
+      <div class="commands-grid">
+        <div class="cmd-card" data-search="/add-dir 디렉터리 폴더 추가">
+          <span class="cmd-name">/add-dir</span>
+          <span class="cmd-desc">활성 프로젝트 워크스페이스에 새 디렉터리 경로를 추가합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/diff 변경사항 코드비교">
+          <span class="cmd-name">/diff</span>
+          <span class="cmd-desc">에이전트가 수행한 현재 코드베이스 변경사항(diff)을 표시합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/open 파일열기 에디터">
+          <span class="cmd-name">/open</span>
+          <span class="cmd-desc">지정된 파일을 로컬 편집기(VS Code, Vim 등)에서 엽니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/context 컨텍스트 파일목록 심볼">
+          <span class="cmd-name">/context</span>
+          <span class="cmd-desc">에이전트의 현재 컨텍스트에 포함된 모든 파일과 심볼을 나열합니다.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. 에이전트 / 도구 ===== -->
+    <section class="cmd-section" data-category="agent">
+      <div class="section-title">
+        <div class="section-icon icon-emerald">🤖</div>
+        <h2>에이전트 & 도구</h2>
+      </div>
+      <p class="section-desc">AI 에이전트, 모델, MCP 서버, 스킬, 권한 등을 제어하는 명령어입니다.</p>
+      <div class="commands-grid">
+        <div class="cmd-card" data-search="/model 모델 변경 gemini">
+          <span class="cmd-name">/model</span>
+          <span class="cmd-desc">세션에서 사용할 활성 Gemini 모델을 변경합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/agents 서브에이전트 목록">
+          <span class="cmd-name">/agents</span>
+          <span class="cmd-desc">모든 활성 서브에이전트와 커스텀 에이전트를 나열합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/skills 스킬 목록">
+          <span class="cmd-name">/skills</span>
+          <span class="cmd-desc">모든 활성 에이전트 스킬을 나열합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/mcp 서버 도구 프로토콜">
+          <span class="cmd-name">/mcp</span>
+          <span class="cmd-desc">활성 MCP 서버와 노출된 도구(tool)들을 나열합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/hooks 후크 라이프사이클">
+          <span class="cmd-name">/hooks</span>
+          <span class="cmd-desc">등록된 모든 라이프사이클 훅(hooks)을 나열합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/permissions 권한 허용 거부">
+          <span class="cmd-name">/permissions</span>
+          <span class="cmd-desc">도구 실행 권한(허용/거부 목록)을 관리합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/tasks 작업 진행상황">
+          <span class="cmd-name">/tasks</span>
+          <span class="cmd-desc">활성 작업 목록과 진행 상황을 표시합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/btw 질문 사이드">
+          <span class="cmd-name">/btw</span>
+          <span class="cmd-desc">에이전트 실행 없이 간단한 사이드 질문을 합니다.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. 화면 / UI ===== -->
+    <section class="cmd-section" data-category="ui">
+      <div class="section-title">
+        <div class="section-icon icon-rose">🎨</div>
+        <h2>화면 & UI</h2>
+      </div>
+      <p class="section-desc">터미널 인터페이스의 표시, 복사, 뷰어 등 시각적 요소를 제어하는 명령어입니다.</p>
+      <div class="commands-grid">
+        <div class="cmd-card" data-search="/artifact 아티팩트 뷰어">
+          <span class="cmd-name">/artifact</span>
+          <span class="cmd-desc">TUI 아티팩트 뷰어를 엽니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/copy 복사 클립보드">
+          <span class="cmd-name">/copy</span>
+          <span class="cmd-desc">마지막 에이전트 응답을 시스템 클립보드에 복사합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/config /settings 설정 환경설정">
+          <span class="cmd-name">/config · /settings</span>
+          <span class="cmd-desc">TUI 설정 패널을 열어 환경을 커스터마이즈합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/fast 빠른모드 타이핑 속도">
+          <span class="cmd-name">/fast</span>
+          <span class="cmd-desc">타이핑 딜레이와 사고 시각화의 빠른 모드를 토글합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/statusline 상태줄 상태바">
+          <span class="cmd-name">/statusline</span>
+          <span class="cmd-desc">터미널 하단 상태 줄을 토글합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/title 타이틀 제목표시줄">
+          <span class="cmd-name">/title</span>
+          <span class="cmd-desc">터미널 타이틀을 토글하거나 설정합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/planning 플래닝 계획 태스크">
+          <span class="cmd-name">/planning</span>
+          <span class="cmd-desc">인터랙티브 그래픽 플래닝 및 태스크 리스트 에디터를 엽니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/usage /quota 토큰 사용량 비용 쿼터">
+          <span class="cmd-name">/usage · /quota</span>
+          <span class="cmd-desc">토큰 사용량과 세션 비용 통계를 표시합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/help 도움말 명령어목록">
+          <span class="cmd-name">/help</span>
+          <span class="cmd-desc">도움말 메뉴와 명령어, 단축키를 표시합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/changelog 변경로그 릴리즈">
+          <span class="cmd-name">/changelog</span>
+          <span class="cmd-desc">제품 변경 로그와 릴리즈 노트를 표시합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/keybindings 키바인딩 단축키설정">
+          <span class="cmd-name">/keybindings</span>
+          <span class="cmd-desc">모든 활성 CLI 키보드 단축키를 설정합니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/feedback 피드백 버그리포트">
+          <span class="cmd-name">/feedback</span>
+          <span class="cmd-desc">제품 피드백 및 버그 리포트 양식을 엽니다.</span>
+        </div>
+        <div class="cmd-card" data-search="/credits 크레딧 라이선스 오픈소스">
+          <span class="cmd-name">/credits</span>
+          <span class="cmd-desc">서드파티 소프트웨어 라이선스 및 저작자 표시를 보여줍니다.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. 키보드 단축키 ===== -->
+    <section class="cmd-section" data-category="shortcut">
+      <div class="section-title">
+        <div class="section-icon icon-amber">⌨️</div>
+        <h2>키보드 단축키</h2>
+      </div>
+      <p class="section-desc">터미널에서 빠르게 사용할 수 있는 단축키입니다.</p>
+      <div class="shortcut-grid">
+        <div class="shortcut-card" data-search="esc 닫기 메뉴">
+          <kbd>ESC</kbd>
+          <span class="desc">활성 메뉴(스킬, 설정 등)를 닫습니다</span>
+        </div>
+        <div class="shortcut-card" data-search="ctrl+d 종료 exit">
+          <kbd>Ctrl+D Ctrl+D</kbd>
+          <span class="desc">CLI를 종료합니다 (<code>/exit</code>와 동일)</span>
+        </div>
+        <div class="shortcut-card" data-search="up down 방향키 히스토리 이전명령">
+          <kbd>↑ / ↓</kbd>
+          <span class="desc">명령어 히스토리를 탐색합니다</span>
+        </div>
+        <div class="shortcut-card" data-search="enter 인증 oauth 브라우저">
+          <kbd>Enter</kbd>
+          <span class="desc">최초 실행 시 브라우저 OAuth 인증 시작</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. 설정 (settings.json) ===== -->
+    <section class="cmd-section" data-category="settings">
+      <div class="section-title">
+        <div class="section-icon icon-violet">⚙️</div>
+        <h2>설정 (settings.json)</h2>
+      </div>
+      <p class="section-desc">
+        <code style="color: var(--accent-violet);">~/.gemini/antigravity-cli/settings.json</code> 파일에서 설정 가능한 모든 키입니다.
+      </p>
+      <div class="settings-table-wrapper">
+        <table class="settings-table">
+          <thead>
+            <tr>
+              <th>키</th>
+              <th>타입</th>
+              <th>설명</th>
+              <th>기본값</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-search="allownonworkspaceaccess 외부파일 접근">
+              <td class="key-col">allowNonWorkspaceAccess</td>
+              <td class="type-col">bool</td>
+              <td>워크스페이스 루트 외부의 파일 읽기/쓰기를 허용합니다.</td>
+              <td class="default-col">false</td>
+            </tr>
+            <tr data-search="altscreenmode 대체화면 버퍼">
+              <td class="key-col">altScreenMode</td>
+              <td class="type-col">string</td>
+              <td>대체 화면 버퍼 사용을 제어합니다. (<code>default</code>, <code>always</code>, <code>never</code>)</td>
+              <td class="default-col">"default"</td>
+            </tr>
+            <tr data-search="artifactreviewpolicy 아티팩트 리뷰 정책">
+              <td class="key-col">artifactReviewPolicy</td>
+              <td class="type-col">string</td>
+              <td>아티팩트 리뷰 요청 시점을 제어합니다. (<code>always-proceed</code>, <code>agent-decides</code>, <code>asks-for-review</code>)</td>
+              <td class="default-col">"asks-for-review"</td>
+            </tr>
+            <tr data-search="colorscheme 색상 다크모드 라이트모드 테마">
+              <td class="key-col">colorScheme</td>
+              <td class="type-col">string</td>
+              <td>CLI 색상 스킴입니다. (<code>terminal</code>, <code>dark</code>, <code>light</code>)</td>
+              <td class="default-col">"terminal"</td>
+            </tr>
+            <tr data-search="editor 편집기 vim nano vscode">
+              <td class="key-col">editor</td>
+              <td class="type-col">string</td>
+              <td>파일을 열 때 사용할 편집기 명령어입니다. (예: <code>vim</code>, <code>nano</code>, <code>auto</code>)</td>
+              <td class="default-col">"auto"</td>
+            </tr>
+            <tr data-search="enabletelemetry 텔레메트리 분석 통계">
+              <td class="key-col">enableTelemetry</td>
+              <td class="type-col">bool</td>
+              <td>익명 사용량 및 크래시 리포팅을 토글합니다.</td>
+              <td class="default-col">true</td>
+            </tr>
+            <tr data-search="enabletermainalsandbox 샌드박스 보안">
+              <td class="key-col">enableTerminalSandbox</td>
+              <td class="type-col">bool</td>
+              <td>터미널 명령을 제한된 샌드박스 환경에서 실행합니다.</td>
+              <td class="default-col">false</td>
+            </tr>
+            <tr data-search="gcp 구글클라우드 프로젝트 vertex">
+              <td class="key-col">gcp</td>
+              <td class="type-col">object</td>
+              <td>클라우드 기반 도구를 위한 GCP 프로젝트 및 위치 설정입니다.</td>
+              <td class="default-col">nil</td>
+            </tr>
+            <tr data-search="historysize 히스토리 크기 기록">
+              <td class="key-col">historySize</td>
+              <td class="type-col">int</td>
+              <td>디스크에 저장할 최대 히스토리 항목 수입니다. (<code>-1</code>은 무제한)</td>
+              <td class="default-col">2000</td>
+            </tr>
+            <tr data-search="model 모델 gemini-flash">
+              <td class="key-col">model</td>
+              <td class="type-col">string</td>
+              <td>메인 에이전트가 사용하는 활성 모델 식별자입니다.</td>
+              <td class="default-col">"gemini-3.5-flash"</td>
+            </tr>
+            <tr data-search="notifications 알림 시스템 완료">
+              <td class="key-col">notifications</td>
+              <td class="type-col">bool</td>
+              <td>작업 완료 시 시스템 알림을 활성화합니다.</td>
+              <td class="default-col">false</td>
+            </tr>
+            <tr data-search="permissions 권한 규칙">
+              <td class="key-col">permissions</td>
+              <td class="type-col">object</td>
+              <td>파일, 명령어, URL에 대한 전역 허용/거부/확인 규칙입니다.</td>
+              <td class="default-col">nil</td>
+            </tr>
+            <tr data-search="runninglightspeed 타이핑속도 시각화">
+              <td class="key-col">runningLightSpeed</td>
+              <td class="type-col">string</td>
+              <td>사고 시각화를 위한 인위적 타이핑 딜레이입니다. (<code>off</code>, <code>fast</code>, <code>medium</code>, <code>slow</code>)</td>
+              <td class="default-col">"medium"</td>
+            </tr>
+            <tr data-search="showfeedbacksurvey 피드백 설문">
+              <td class="key-col">showFeedbackSurvey</td>
+              <td class="type-col">bool</td>
+              <td>주기적 제품 피드백 설문을 표시합니다.</td>
+              <td class="default-col">true</td>
+            </tr>
+            <tr data-search="showtips 팁 도움말표시">
+              <td class="key-col">showTips</td>
+              <td class="type-col">bool</td>
+              <td>CLI에 유용한 팁과 단축키를 표시합니다.</td>
+              <td class="default-col">true</td>
+            </tr>
+            <tr data-search="statusline 상태줄 설정">
+              <td class="key-col">statusLine</td>
+              <td class="type-col">object</td>
+              <td>TUI 상태 줄 설정입니다.</td>
+              <td class="default-col">nil</td>
+            </tr>
+            <tr data-search="title 타이틀 설정">
+              <td class="key-col">title</td>
+              <td class="type-col">object</td>
+              <td>TUI 타이틀 설정입니다.</td>
+              <td class="default-col">nil</td>
+            </tr>
+            <tr data-search="toolpermission 도구권한 확인모드">
+              <td class="key-col">toolPermission</td>
+              <td class="type-col">string</td>
+              <td>도구 확인 모드입니다. (<code>always-proceed</code>, <code>request-review</code>, <code>strict</code>, <code>proceed-in-sandbox</code>)</td>
+              <td class="default-col">"request-review"</td>
+            </tr>
+            <tr data-search="trustedworkspaces 신뢰 워크스페이스 경로">
+              <td class="key-col">trustedWorkspaces</td>
+              <td class="type-col">array</td>
+              <td>사용자가 실행을 허용하는 신뢰 디렉터리 경로 목록입니다.</td>
+              <td class="default-col">[]</td>
+            </tr>
+            <tr data-search="useg1credits 구글원 프리미엄">
+              <td class="key-col">useG1Credits</td>
+              <td class="type-col">bool</td>
+              <td>Google One AI 프리미엄 쿼터 사용을 토글합니다.</td>
+              <td class="default-col">false</td>
+            </tr>
+            <tr data-search="verbosity 상세도 로그레벨">
+              <td class="key-col">verbosity</td>
+              <td class="type-col">string</td>
+              <td>에이전트 트레이스 렌더링의 상세도입니다. (<code>high</code>, <code>low</code>)</td>
+              <td class="default-col">"high"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 푸터 ===== -->
+  <footer>
+    <div class="container">
+      <p>Google Antigravity CLI 커맨드 가이드 · 2026</p>
+      <p style="margin-top:6px;">
+        <a href="https://antigravity.google/docs" target="_blank">공식 문서</a> · 
+        <a href="https://antigravity.google/changelog" target="_blank">변경 로그</a> · 
+        <a href="https://antigravity.google/support" target="_blank">지원</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ===== 카테고리 필터 =====
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const sections = document.querySelectorAll('.cmd-section');
+    const searchInput = document.getElementById('searchInput');
+    const noResults = document.getElementById('noResults');
+
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+
+        searchInput.value = '';
+
+        sections.forEach(sec => {
+          if (cat === 'all' || sec.dataset.category === cat) {
+            sec.classList.remove('hidden');
+            // 카드 전부 보이게
+            sec.querySelectorAll('.cmd-card, .shortcut-card, .settings-table tbody tr').forEach(el => {
+              el.classList.remove('hidden');
+            });
+          } else {
+            sec.classList.add('hidden');
+          }
+        });
+        noResults.style.display = 'none';
+      });
+    });
+
+    // ===== 검색 =====
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase().trim();
+
+      if (!query) {
+        // 검색어 비우면 현재 카테고리 상태로 복원
+        const activeCat = document.querySelector('.category-btn.active').dataset.cat;
+        sections.forEach(sec => {
+          if (activeCat === 'all' || sec.dataset.category === activeCat) {
+            sec.classList.remove('hidden');
+            sec.querySelectorAll('.cmd-card, .shortcut-card, .settings-table tbody tr').forEach(el => {
+              el.classList.remove('hidden');
+            });
+          }
+        });
+        noResults.style.display = 'none';
+        return;
+      }
+
+      // 전체에서 검색
+      let totalVisible = 0;
+      sections.forEach(sec => {
+        let sectionHasMatch = false;
+
+        // 커맨드 카드
+        sec.querySelectorAll('.cmd-card').forEach(card => {
+          const text = (card.dataset.search + ' ' + card.textContent).toLowerCase();
+          if (text.includes(query)) {
+            card.classList.remove('hidden');
+            sectionHasMatch = true;
+            totalVisible++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        // 단축키 카드
+        sec.querySelectorAll('.shortcut-card').forEach(card => {
+          const text = (card.dataset.search + ' ' + card.textContent).toLowerCase();
+          if (text.includes(query)) {
+            card.classList.remove('hidden');
+            sectionHasMatch = true;
+            totalVisible++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        // 설정 테이블 행
+        sec.querySelectorAll('.settings-table tbody tr').forEach(row => {
+          const text = (row.dataset.search + ' ' + row.textContent).toLowerCase();
+          if (text.includes(query)) {
+            row.classList.remove('hidden');
+            sectionHasMatch = true;
+            totalVisible++;
+          } else {
+            row.classList.add('hidden');
+          }
+        });
+
+        sec.classList.toggle('hidden', !sectionHasMatch);
+      });
+
+      noResults.style.display = totalVisible === 0 ? 'block' : 'none';
+    });
+
+    // ===== 카드 등장 애니메이션 (Intersection Observer) =====
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, idx) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationDelay = `${idx * 0.04}s`;
+          entry.target.style.animationPlayState = 'running';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.cmd-card, .shortcut-card').forEach(card => {
+      card.style.animationPlayState = 'paused';
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>

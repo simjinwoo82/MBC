@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 파비콘 경로 수정 (02/imgs/ 폴더 내에 존재 확인됨) -->
+    <link rel="icon" type="image/svg+xml" href="./02/imgs/favicon.svg" />
+    <title>심진우의 홈페이지</title>
+    <style>
+      @font-face {
+        font-family: "Presentation";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-1Thin.woff2") format("woff2");
+        font-weight: 100;
+        font-display: swap;
+      }
+
+      body {
+        font-size: 40px;
+        font-family: "Presentation", sans-serif;
+        font-weight: 100; /* 폰트 파일(Thin)에 맞춰 100으로 수정 */
+        font-style: normal;
+        background-color: beige;
+        margin: 0;
+        padding: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+
+      /* 링크 호버 효과 클래스 */
+      .t1 {
+        text-decoration: none;
+        color: black;
+        transition: all 0.3s ease;
+      }
+
+      .t1:hover {
+        color: red;
+        font-weight: 200; /* 호버 시 약간 두꺼워지게 설정 */
+      }
+
+      h2 {
+        background-color: aqua;
+        padding: 5px 10px;
+        display: inline-block;
+      }
+
+      ul {
+        list-style-type: square;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      section {
+        margin-bottom: 40px;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>심진우의 홈페이지</h1>
+      <nav>
+        <a href="./path/img/cook.html" class="t1">오늘의 식탁</a>
+      </nav>
+    </header>
+
+    <hr />
+
+    <main>
+      <section>
+        <h2>갤러리 및 QR코드</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end;">
+          <figure>
+            <img src="./ex01/sh.png" alt="프로필 사진" width="200" />
+            <figcaption style="font-size: 16px; text-align: center;">프로필</figcaption>
+          </figure>
+          <figure>
+            <img src="./ex01/1.5월12일과제.png" alt="5월 12일 과제 결과 이미지" width="200" />
+            <figcaption style="font-size: 16px; text-align: center;">5월 12일 과제</figcaption>
+          </figure>
+          <figure>
+            <img src="./ex01/qr.png" alt="홈페이지 접속 QR코드" width="150" />
+            <figcaption style="font-size: 16px; text-align: center;">QR코드</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>학습 및 과제 목록</h2>
+        <ul>
+          <li><a href="./docs/gemini-cli-commands.html" class="t1">Gemini CLI 슬래시 명령어 가이드</a></li>
+          <li><a href="./01/ex1-4.html" class="t1">제목태그:heading</a></li>
+          <li><a href="./01/ex1-5.html" class="t1">문단태그</a></li>
+          <li><a href="./01/img/ex1-13.html" class="t1">5월13일숙제</a></li>
+          <li><a href="./path/img/1.html" class="t1">1.html</a></li>
+          <li><a href="./02/ex2-15.html" class="t1">5월22일숙제</a></li>
+          <li><a href="figma.html" class="t1">피그마 디자인 구현</a></li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>미디어 자료</h2>
+        <div style="margin-bottom: 20px;">
+          <h3>오디오 재생</h3>
+          <audio src="./01/media/music.wav" controls muted loop></audio>
+          <p style="font-size: 18px;">(브라우저 정책에 따라 자동 재생이 제한될 수 있습니다.)</p>
+        </div>
+        <div>
+          <h3>비디오 재생</h3>
+          <video src="./01/media/video.mp4" width="500" controls loop muted></video>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

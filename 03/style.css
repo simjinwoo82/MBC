@@ -1,0 +1,185 @@
+/* Figma Exact Specs - Final 100% Match */
+:root {
+    --sheet-radius: 34px;
+    --btn-radius: 100px;
+    --labels-primary: #000000;
+    --fills-secondary: rgba(120, 120, 128, 0.16);
+    --destructive: #ff383c;
+    --bg-white: #ffffff; /* Pure white background as requested */
+    --shadow-color: rgba(0, 0, 0, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background-color: #e5e5e5; /* Contrast background for the frame */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    min-height: 100vh;
+}
+
+/* Home Frame - Pure White Background (Figma bg-white) */
+.home-frame {
+    position: relative;
+    width: 426px;
+    height: 661px;
+    background-color: var(--bg-white); /* 100% White Background applied here */
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Action Sheet Position (top: 67px, left: 60px, width: 300px) */
+.action-sheet {
+    position: absolute;
+    top: 67px;
+    left: 60px;
+    width: 300px;
+    padding: 14px; /* Exact padding from design-context */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Gap between header and buttons */
+    z-index: 10;
+}
+
+/* Background Layers for 100% Visual Match */
+.sheet-bg-layers {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.fill-shadow {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--sheet-radius);
+    box-shadow: 0px 8px 40px 0px var(--shadow-color);
+    background-color: rgba(245, 245, 245, 0.6);
+    backdrop-filter: blur(20px);
+}
+
+/* Color Dodge Layer for premium glass feel */
+.fill-shadow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #262626;
+    mix-blend-mode: color-dodge;
+    border-radius: var(--sheet-radius);
+    pointer-events: none;
+}
+
+/* Content Layout with Exact Spacing */
+.sheet-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Precise gap between blocks */
+    align-items: center;
+}
+
+/* Title and Description Spacing */
+.title-desc-group {
+    width: 100%;
+    padding: 8px 8px 24px 8px; /* pt:8, pb:24, px:8 from design-context */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* EXACT GAP between Title and Description */
+    text-align: center;
+    letter-spacing: -0.43px;
+}
+
+.sheet-title {
+    font-size: 17px;
+    font-weight: 600; /* Semibold 590 */
+    color: var(--labels-primary);
+    line-height: 22px;
+}
+
+.sheet-desc {
+    font-size: 17px;
+    font-weight: 400; /* Regular */
+    color: var(--labels-primary);
+    line-height: 22px;
+}
+
+/* Button Group with Exact Spacing */
+.button-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* EXACT GAP between each action button */
+}
+
+/* Action Buttons (h: 48px, p: 13px 16px) */
+.action-btn {
+    width: 100%;
+    height: 48px;
+    padding: 13px 16px;
+    border: none;
+    border-radius: var(--btn-radius);
+    background-color: var(--fills-secondary);
+    color: var(--labels-primary);
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 500; /* Medium 510 */
+    letter-spacing: -0.43px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.action-btn.destructive {
+    color: var(--destructive);
+}
+
+.action-btn:hover {
+    background-color: rgba(120, 120, 128, 0.24);
+}
+
+.action-btn:active {
+    transform: scale(0.98);
+}
+
+/* Navigation Hint */
+.navigation-hint {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.navigation-hint a {
+    color: #007aff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Scaling */
+@media (max-width: 500px) {
+    .home-frame {
+        transform: scale(0.85);
+        transform-origin: top center;
+    }
+}

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAFEIN - 피그마 디자인 구현</title>
+    <!-- 구글 폰트 로드 -->
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Unbounded', sans-serif;
+        }
+
+        /* 메인 배너 컨테이너 (1440x500) */
+        .banner {
+            width: 1440px;
+            height: 500px;
+            background-color: #000000;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* 장식 레이어 (Decoration) */
+        .decoration {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1360px; /* 1440 - 80 */
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 중앙 상단 브라운 박스 */
+        .top-box {
+            position: absolute;
+            background-color: #a86e3c;
+            border: 1px solid #000000;
+            height: 314px;
+            width: 736px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 40px;
+        }
+
+        /* 중앙 하단 블랙 박스 */
+        .bottom-box {
+            position: absolute;
+            background-color: #000000;
+            border: 1px solid #000000;
+            height: 107px;
+            width: 735px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: calc(50% + 103px);
+        }
+
+        /* 좌측 외곽 박스 */
+        .left-box-outline {
+            position: absolute;
+            border: 1px solid #000000;
+            height: 420px;
+            left: 2.67%;
+            right: 74.47%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* 우측 외곽 박스 */
+        .right-box-outline {
+            position: absolute;
+            border: 1px solid #000000;
+            height: 420px;
+            left: calc(75% - 8px);
+            width: 343px;
+            top: 40px;
+        }
+
+        /* 이미지 컨테이너 (Rectangle) */
+        .image-rect {
+            position: absolute;
+            width: 342px;
+            height: 420px;
+            top: 40px;
+            background-color: #d9d9d9;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .image-rect.left {
+            left: 40px;
+        }
+
+        .image-rect.right {
+            left: calc(75% - 8px);
+            width: 343px;
+        }
+
+        .image-rect img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 중앙 텍스트 영역 */
+        .content-text {
+            position: absolute;
+            left: calc(25% + 375px);
+            top: 196.5px;
+            transform: translate(-50%, -50%);
+            width: 654px;
+            text-align: center;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .title {
+            font-weight: 800;
+            font-size: 81.3px;
+            line-height: 0.9;
+            color: #000000;
+            letter-spacing: -2.4px;
+        }
+
+        .subtitle {
+            font-weight: 800;
+            font-size: 40px;
+            line-height: 0.9;
+            color: #000000;
+        }
+
+        .eng-title {
+            font-weight: 800;
+            font-size: 28px;
+            line-height: 0.9;
+            color: #000000;
+        }
+
+        /* 하단 이벤트 텍스트 */
+        .event-text {
+            position: absolute;
+            left: calc(25% + 374px);
+            top: calc(50% + 156.5px);
+            transform: translate(-50%, -50%);
+            width: 654px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 55px;
+            line-height: 0.9;
+            color: #ffffff;
+            letter-spacing: 2.75px;
+            z-index: 10;
+        }
+
+        /* 시간 및 정보 텍스트 (DM Mono) */
+        .info-text {
+            position: absolute;
+            top: 250px;
+            transform: translate(-50%, -50%);
+            font-family: 'DM Mono', monospace;
+            font-weight: 500;
+            font-size: 24px;
+            text-align: center;
+            width: 270px;
+            z-index: 10;
+            letter-spacing: 1.2px;
+        }
+
+        .info-left {
+            left: 211px;
+            color: rgba(255, 255, 255, 0); /* 피그마 데이터상 투명 */
+        }
+
+        .info-right {
+            left: calc(75% + 164px);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <!-- 배경 및 장식 레이어 -->
+        <div class="decoration">
+            <div class="top-box"></div>
+            <div class="bottom-box"></div>
+            <div class="left-box-outline"></div>
+            <div class="right-box-outline"></div>
+        </div>
+
+        <!-- 이미지 영역 -->
+        <div class="image-rect left">
+            <img src="02/imgs/cafe.png" alt="Cafe Image Left">
+        </div>
+        <div class="image-rect right">
+            <img src="02/imgs/cafe.png" alt="Cafe Image Right">
+        </div>
+
+        <!-- 중앙 텍스트 컨텐츠 -->
+        <div class="content-text">
+            <h1 class="title">CAFEIN</h1>
+            <p class="subtitle">매일 마주하는 작은 휴식</p>
+            <p class="eng-title">Your Daily Escape</p>
+        </div>
+
+        <!-- 측면 정보 텍스트 -->
+        <div class="info-text info-left">8AM-2PM</div>
+        <div class="info-text info-right">OPEN EVERY DAY</div>
+
+        <!-- 하단 이벤트 문구 -->
+        <div class="event-text">
+            오픈기념 아아 1000원
+        </div>
+    </div>
+
+</body>
+</html>

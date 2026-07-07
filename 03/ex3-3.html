@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="alert">click</button>
+    <hr />
+    <button class="confirm">confirm</button>
+    <hr />
+    <button class="write">write</button>
+    
+    <script>
+      document.querySelector('.alert').onclick = function () {
+        window.alert("hi")
+        /* 함수>메서드 */
+      }
+
+      document.querySelector('.confirm').onclick = function () {
+        confirm('정말 삭제 하시겠습니까?');
+      }
+
+      document.querySelector('.write').onclick = function () {
+        let a = document.write(`<h1>은솔이</h1><h2>일어나</h2>`);
+      
+      }
+    </script>
+    <hr />
+    <button class="log">log</button>
+    <script>
+        document.querySelector('.log').onclick = function () {
+        let a; 
+        a = console.log('출력해봐요');
+      }
+    </script>
+
+  </body>
+</html>
+<!-- 
+괄호있어?
+NO: 변수(단독사용), 속성(다른 식별자와 혼용)
+YES: 함수(단독사용),메서드(다른 식별자와 혼용)
+ -->

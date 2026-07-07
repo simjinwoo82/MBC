@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML 쉽게 이해하기</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', '맑은 고딕', sans-serif;
+            background-color: #FFF9C4;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .big-title {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 32px;
+        }
+        .box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+        }
+        .house-part {
+            border: 4px solid;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .doctype { border-color: #FF9800; background: #FFF3E0; }
+        .html-part { border-color: #4CAF50; background: #E8F5E9; }
+        .head-part { border-color: #2196F3; background: #E3F2FD; }
+        .body-part { border-color: #E91E63; background: #FCE4EC; }
+
+        .arrow {
+            font-size: 24px;
+            text-align: center;
+            color: #666;
+        }
+
+        .tag {
+            background-color: #333;
+            color: #FFD700;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+
+        .highlight {
+            background-color: #FFFF00;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .fun-fact {
+            background-color: #E1F5FE;
+            border-left: 5px solid #03A9F4;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .compare-table td {
+            border: 2px solid #ddd;
+            padding: 12px;
+        }
+        .compare-table .left {
+            background-color: #FFECB3;
+            width: 30%;
+            text-align: center;
+            font-weight: bold;
+        }
+        .compare-table .right {
+            background-color: #fff;
+        }
+
+        .code-box {
+            background-color: #263238;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+        .code-box .yellow { color: #FFD700; }
+        .code-box .green { color: #69F0AE; }
+        .code-box .orange { color: #FFAB40; }
+        .code-box .gray { color: #78909C; font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="big-title">
+        🏠 HTML은 웹페이지의 뼈대야!
+    </div>
+
+    <div class="box">
+        <h2>📖 HTML이 뭐예요?</h2>
+        <p>HTML은 <strong>웹페이지를 만드는 언어</strong>예요.</p>
+        <p>쉽게 말하면, <span class="highlight">웹사이트의 설계도</span>라고 생각하면 돼요!</p>
+        <p>우리가 보는 모든 웹사이트(유튜브, 네이버, 게임 사이트 등)는 HTML로 만들어졌어요.</p>
+    </div>
+
+    <div class="box">
+        <h2>🏠 집에 비유해서 이해필게요</h2>
+        <p>HTML 문서는 <strong>집</strong>과 똑같아요! 집은 여러 공간으로 나뉘죠?</p>
+
+        <div class="house-part doctype">
+            <h3>🔑 1. &lt;!DOCTYPE html&gt; - "이 집은 HTML5 집이에요!"</h3>
+            <p>집 문 앞에 붙은 <strong>주소판</strong> 같은 거예요.</p>
+            <p>브라우저(크롬, 사파리)에게 <span class="highlight">"이 문서는 HTML5로 만들었어!"</span> 라고 알려주는 거예요.</p>
+            <div class="fun-fact">
+                💡 <strong>꿀팁:</strong> 이 줄은 항상 맨 위에 써야 해요. 안 그러면 브라우저가 헷갈려요!
+            </div>
+        </div>
+
+        <div class="arrow">⬇️</div>
+
+        <div class="house-part html-part">
+            <h3>🧱 2. &lt;html&gt; - "집 전체"</h3>
+            <p>모든 것을 감싸는 <strong>집 전체</strong>예요.</p>
+            <p>모든 내용은 이 안에 들어가요. 집 안에 방이 있는 것처럼!</p>
+        </div>
+
+        <div class="arrow">⬇️ 이 안에 두 개의 방이 있어요</div>
+
+        <div class="house-part head-part">
+            <h3>🧠 3. &lt;head&gt; - "보이지 않는 창고"</h3>
+            <p>이 방은 <strong>화면에 안 보여요!</strong></p>
+            <p>하지만 중요한 것들이 여기 있어요:</p>
+            <ul>
+                <li>📛 문서 이름 (브라우저 탭에 보이는 제목)</li>
+                <li>🔤 한글을 제대로 보여주는 설정</li>
+                <li>🎨 예쁘게 꾸미는 옷(CSS) 파일 연결</li>
+            </ul>
+            <p>마치 집 안의 <strong>창고</strong>나 <strong>서랍</strong> 같은 곳이에요. 안 보여도 꼭 필요해요!</p>
+        </div>
+
+        <div class="arrow">⬇️</div>
+
+        <div class="house-part body-part">
+            <h3>🖥️ 4. &lt;body&gt; - "손님을 맞이하는 거실"</h3>
+            <p>이 방은 <strong>화면에 다 보여요!</strong></p>
+            <p>글자, 사진, 버튼, 동영상 등 우리가 보는 모든 것이 여기 있어요.</p>
+            <p>마치 손님이 오면 보여주는 <strong>거실</strong>이에요!</p>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2>🔍 실제 코드로 보기</h2>
+        <p>이제 집 구조를 실제 HTML 코드로 볼까요?</p>
+
+        <div class="code-box">
+<pre><span class="yellow">&lt;!DOCTYPE html&gt;</span>                        <span class="gray">&lt;-- "이건 HTML5 집이에요!" (주소판)</span>
+<span class="yellow">&lt;html&gt;</span>                                   <span class="gray">&lt;-- "집 전체 시작!"</span>
+    <span class="yellow">&lt;head&gt;</span>                               <span class="gray">&lt;-- "창고 시작" (화면에 안 보임)</span>
+        <span class="yellow">&lt;meta</span> <span class="orange">charset</span>=<span class="green">"UTF-8"</span><span class="yellow">&gt;</span>         <span class="gray">&lt;-- "한글 제대로 보여줘!"</span>
+        <span class="yellow">&lt;title&gt;</span><span class="green">내 첫 웹페이지</span><span class="yellow">&lt;/title&gt;</span>    <span class="gray">&lt;-- "브라우저 탭 제목"</span>
+    <span class="yellow">&lt;/head&gt;</span>                            <span class="gray">&lt;-- "창고 끝"</span>
+    <span class="yellow">&lt;body&gt;</span>                             <span class="gray">&lt;-- "거실 시작!" (화면에 보임)</span>
+        <span class="yellow">&lt;h1&gt;</span><span class="green">안녕하세요!</span><span class="yellow">&lt;/h1&gt;</span>          <span class="gray">&lt;-- 큰 제목</span>
+        <span class="yellow">&lt;p&gt;</span><span class="green">나의 첫 웹페이지예요.</span><span class="yellow">&lt;/p&gt;</span>  <span class="gray">&lt;-- 문단</span>
+    <span class="yellow">&lt;/body&gt;</span>                            <span class="gray">&lt;-- "거실 끝"</span>
+<span class="yellow">&lt;/html&gt;</span>                                <span class="gray">&lt;-- "집 전체 끝!"</span></pre>
+        </div>
+    </div>
+
+    <div class="box">
+        <h2>📋 각 부분 딱 3줄 요약</h2>
+        <table class="compare-table">
+            <tr>
+                <td class="left">&lt;!DOCTYPE html&gt;</td>
+                <td class="right">이 문서가 HTML5라고 알려주는 <strong>주소판</strong>이에요.<br>항상 맨 첫 줄에 써요.</td>
+            </tr>
+            <tr>
+                <td class="left">&lt;html&gt;</td>
+                <td class="right">모든 내용을 감싸는 <strong>집 전체</strong>예요.<br>시작 태그와 끝 태그가 있어요.</td>
+            </tr>
+            <tr>
+                <td class="left">&lt;head&gt;</td>
+                <td class="right"><strong>화면에 안 보이는 창고</strong>예요.<br>이름, 설정, 옷(CSS)을 여기 넣어요.</td>
+            </tr>
+            <tr>
+                <td class="left">&lt;body&gt;</td>
+                <td class="right"><strong>화면에 보이는 거실</strong>이에요.<br>글자, 사진, 버튼 등을 여기 넣어요.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="box">
+        <h2>🎯 중요한 규칙!</h2>
+        <ol>
+            <li><strong>여는 태그</strong>가 있으면 <strong>닫는 태그</strong>가 있어야 해요
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;html&gt;</span> ... <span class="tag">&lt;/html&gt;</span>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span> ... <span class="tag">&lt;/body&gt;</span>
+            </li>
+            <li>태그는 <strong>&lt;&gt;</strong> 안에 써요 (엇갈림 괄호)</li>
+            <li>닫는 태그에는 <strong>/</strong> 슬래시가 들어가요</li>
+            <li>&lt;head&gt;는 <strong>보이지 않아요</strong>, &lt;body&gt;는 <strong>보여요</strong></li>
+        </ol>
+    </div>
+
+    <div class="box">
+        <h2>🧩 비유 정리</h2>
+        <p style="text-align: center; font-size: 20px;">
+            HTML 문서 = 🏠 집<br><br>
+            &lt;!DOCTYPE&gt; = 🔑 집 앞 주소판<br>
+            &lt;html&gt; = 🧱 집 전체 벽<br>
+            &lt;head&gt; = 📦 보이지 않는 창고<br>
+            &lt;body&gt; = 🛋️ 손님 보는 거실
+        </p>
+    </div>
+
+    <div class="fun-fact">
+        🌟 <strong>기억하세요!</strong> 모든 웹사이트는 이 4가지로 시작해요. 이 구조만 알면 반은 먹고 들어가는 거예요!
+    </div>
+
+</body>
+</html>

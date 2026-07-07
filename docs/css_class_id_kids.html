@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 CSS 이름표 붙이기: Class와 ID</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', '맑은 고딕', 'Malgun Gothic', sans-serif;
+            background: #FFF9C4;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #FF6B6B;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 3px solid;
+        }
+
+        .card.class-card {
+            border-color: #4CAF50;
+            background: #E8F5E9;
+        }
+
+        .card.id-card {
+            border-color: #2196F3;
+            background: #E3F2FD;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .class-card h2 { color: #2E7D32; }
+        .id-card h2 { color: #1565C0; }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: #FFE082;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .analogy {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 1.1em;
+            border-left: 5px solid #FFC107;
+        }
+
+        .code-box {
+            background: #263238;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Consolas', monospace;
+            font-size: 1.1em;
+            margin-top: 15px;
+            overflow-x: auto;
+        }
+
+        .code-html { color: #FFAB40; }
+        .code-css { color: #69F0AE; }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .compare-table th {
+            background: #FF9800;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+        }
+
+        .compare-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .compare-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .fun-fact {
+            text-align: center;
+            background: #FFF3E0;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #E65100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 CSS 이름표 붙이기: Class와 ID</h1>
+        <p style="text-align: center; font-size: 1.3em; margin-bottom: 30px;">
+            웹페이지를 예쁘게 꾸밀 때, 어떤 태그에 색칠할지 <strong>"이름표"</strong>를 붙여줘야 해요.<br>
+            이름표에는 두 가지 종류가 있답니다!
+        </p>
+
+        <!-- Class 설명 -->
+        <div class="card class-card">
+            <h2>👯‍♀️ Class (클래스) - "같은 반 친구들"</h2>
+            <div class="analogy">
+                <strong>🧸 쉬운 비유:</strong> 학교의 '반(Class)'을 생각해 보세요!<br>
+                "3학년 1반 친구들, 모두 일어나세요!" 하면 여러 명이 동시에 일어나죠?
+            </div>
+            <p>클래스는 <strong>여러 명에게 똑같은 이름표</strong>를 붙여줄 때 써요.</p>
+            <p>예를 들어, "중요한 글자"라는 뜻으로 <span class="highlight">class="important"</span>라고 여러 곳에 붙일 수 있어요.</p>
+            
+            <div class="code-box">
+                <div class="code-html">&lt;!-- HTML에서 이름표 붙이기 --&gt;</div>
+                <div>&lt;p <span style="color: #FFCDD2;">class="red-text"</span>&gt;나는 빨간색!&lt;/p&gt;</div>
+                <div>&lt;p <span style="color: #FFCDD2;">class="red-text"</span>&gt;나도 빨간색!&lt;/p&gt;</div>
+                <br>
+                <div class="code-css">/* CSS에서 부르기 (점 . 을 찍어요!) */</div>
+                <div><span style="color: #64B5F6;">.red-text</span> { color: red; }</div>
+            </div>
+        </div>
+
+        <!-- ID 설명 -->
+        <div class="card id-card">
+            <h2>👑 ID (아이디) - "오직 한 명뿐인 반장"</h2>
+            <div class="analogy">
+                <strong>🧸 쉬운 비유:</strong> 여러분의 '주민등록번호'나 '학번'을 생각해 보세요!<br>
+                "3학년 1반 15번 김철수 나와라!" 하면 딱 한 명만 나오겠죠?
+            </div>
+            <p>아이디는 <strong>웹페이지에서 딱 하나만 있어야 하는 특별한 이름표</strong>예요.</p>
+            <p>예를 들어, 웹사이트 맨 위에 있는 "로고"는 하나뿐이니까 <span class="highlight">id="logo"</span>라고 붙여요.</p>
+            
+            <div class="code-box">
+                <div class="code-html">&lt;!-- HTML에서 이름표 붙이기 --&gt;</div>
+                <div>&lt;h1 <span style="color: #BBDEFB;">id="main-title"</span>&gt;진짜 중요한 딱 하나의 제목&lt;/h1&gt;</div>
+                <br>
+                <div class="code-css">/* CSS에서 부르기 (우물 정 # 을 찍어요!) */</div>
+                <div><span style="color: #FFB74D;">#main-title</span> { font-size: 50px; }</div>
+            </div>
+        </div>
+
+        <!-- 한눈에 비교 -->
+        <h2>⚖️ 한눈에 비교하기</h2>
+        <table class="compare-table">
+            <tr>
+                <th></th>
+                <th>👯‍♀️ Class (클래스)</th>
+                <th>👑 ID (아이디)</th>
+            </tr>
+            <tr>
+                <td><strong>몇 명에게?</strong></td>
+                <td>여러 명에게 똑같이 붙일 수 있어요 ⭕</td>
+                <td>딱 한 명에게만 붙일 수 있어요 ☝️</td>
+            </tr>
+            <tr>
+                <td><strong>CSS에서 부를 때</strong></td>
+                <td>점 <strong>( . )</strong> 을 찍고 불러요<br><code>.my-class</code></td>
+                <td>우물 정 <strong>( # )</strong> 을 찍고 불러요<br><code>#my-id</code></td>
+            </tr>
+            <tr>
+                <td><strong>누가 더 힘이 셀까?</strong></td>
+                <td>힘이 약해요 💪</td>
+                <td>힘이 엄청 세요! 💪💪💪<br>(둘이 싸우면 ID가 이겨요)</td>
+            </tr>
+        </table>
+
+        <div class="fun-fact">
+            🌟 기억하세요!<br>
+            여러 개를 예쁘게 꾸밀 땐 "클래스( . )"<br>
+            딱 하나만 특별하게 꾸밀 땐 "아이디( # )"
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+https://www.figma.com/design/8AVdw6HEBHJ5oL9VVxcueH/84p~100p?node-id=15-9&t=REgPTiSkpHn91feY-4
+이 피그마 파일을 그래로 html/css 로 구현해
+이 경로에 figma.html 파일로 저장해

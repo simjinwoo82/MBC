@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+     :root {
+      --move: calc(100% - 300px);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: green;
+      background-color: #0aa56a;
+opacity: 0.8;
+background-image:  radial-gradient(circle at 10px 100%, transparent 9px, #dcedc2 9px, #dcedc2 10px, transparent 10px), radial-gradient(circle at 10px 0%, transparent 9px, #dcedc2 9px, #dcedc2 10px, transparent 10px);
+background-size: 20px 10px;
+background-position: 0 0, 10px 0;
+    }
+
+    .ball {
+      z-index: 5;
+      width: 200px;
+      animation: cup 5s infinite alternate;
+      position: absolute;
+    }
+
+    @keyframes cup {
+      0% {
+        left: 0;
+        transform: rotate(0deg);
+      }
+
+      50% {
+        left: var(--move);
+        top: 0;
+      }
+
+      100% {
+        transform: rotate(720deg);
+        left: var(--move);
+        top: var(--move);
+      }
+    }
+    .net{
+      width: 400px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+    }
+  
+  </style>
+</head>
+<body>
+  <img src="./imgs/Soccer Ball.png" alt="" class="ball">
+  <img src="./imgs/net.png" alt="" class="net">
+</body>
+</html>

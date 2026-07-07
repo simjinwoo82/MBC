@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>신장(cm): <input type="number" id="height" /></p>
+    <p>몸무게(kg): <input type="number" id="weight" /></p>
+    <button onclick="check()">결과보여주세요</button>
+    <hr />
+    <p id="result"></p>
+
+    <script>
+     /*  function check() {
+        const h = Number(document.getElementById("height").value);
+        const w = Number(document.getElementById("weight").value);
+
+        if (h <= 0 || w <= 0) {
+          document.getElementById("result").textContent =
+            "신장과 몸무게를 입력해주세요.";
+          return;
+        }
+
+        const ideal = (h - 100) * 0.9;
+        document.getElementById("result").textContent =
+          w >= ideal ? "적정몸무게 이상" : "적정몸무게 미달";
+      } */
+      // #속성이 있는 요소는 변수로 사용가능
+      //=>권장x
+          function check(){
+          const h = height.value;
+          const w = weight.value;
+          const ideal = (h - 100) * 0.9;
+          if (w >ideal){ 
+            result.textContent = "몸무게 이상"
+            }
+          if (w==ideal){ 
+            result.textContent = "몸무게 좋아"
+            }
+          if (w <ideal){ 
+            result.textContent = "몸무게 미달"
+            }
+        }
+    </script>
+  </body>
+</html>

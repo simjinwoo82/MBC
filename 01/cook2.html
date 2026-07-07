@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일 테라초 (Il Terrazzo) | 프리미엄 이탈리안 다이닝</title>
+    <style>
+        /* 디자인 시스템 & 컬러 셋업 */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+        :root {
+            --bg-dark: #0F0F0F;      
+            --bg-card: #161616;      
+            --accent: #E5A93B;       
+            --text-light: #FFFFFF;
+            --text-muted: #A0A0A0;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Noto Sans KR', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            height: 60vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(15,15,15,1)), 
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1920') no-repeat center/cover;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .menu-nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 25px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(15, 15, 15, 0.95);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #222;
+        }
+
+        .menu-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-nav a:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .category-section {
+            margin-bottom: 100px;
+            scroll-margin-top: 100px;
+        }
+
+        .category-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-card {
+            background-color: var(--bg-card);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background-color: #222; /* 이미지 로딩 전 음영 */
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .menu-card:hover .image-container img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .menu-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .menu-origin-name {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .menu-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #0A0A0A;
+            border-top: 1px solid #1A1A1A;
+            color: #555;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IL TERRAZZO</h1>
+        <p>The Essence of Italian Gastronomy</p>
+    </header>
+
+    <nav class="menu-nav">
+        <a href="#pasta">PASTA</a>
+        <a href="#steak">STEAK</a>
+        <a href="#pizza">PIZZA</a>
+        <a href="#salad">SALAD</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- ================= PASTA SECTION ================= -->
+        <section id="pasta" class="category-section">
+            <h2 class="category-title">Pasta</h2>
+            <div class="menu-grid">
+                
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 정통 노른자 소스 카르보나라 실물 비주얼 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1612874742237-6526221588e3?q=80&w=800" alt="정통 까르보나라">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">정통 까르보나라</span>
+                        <span class="menu-origin-name">Carbonara</span>
+                        <p class="menu-desc">크림 없이 계란 노른자, 페코리노 치즈, 구안찰레 본연의 풍미로 완성한 로마 정통 스타일입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 진한 미트 소스 중심의 볼로네제 라구 파스타 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1556761223-4c4282c73f77?q=80&w=800" alt="볼로네제">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">볼로네제 라구</span>
+                        <span class="menu-origin-name">Bolognese</span>
+                        <p class="menu-desc">다진 소고기와 와인, 채소를 넣고 오랜 시간 푹 끓여내 깊은 감칠맛을 자랑하는 미트 파스타입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 마늘 슬라이스와 올리브오일 위주의 선명한 알리오 올리오 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1673442635965-34f1b36d8944?q=80&w=800" alt="알리오 올리오">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">알리오 올리오</span>
+                        <span class="menu-origin-name">Aglio e Olio</span>
+                        <p class="menu-desc">마늘의 향과 페페론치노의 매콤함을 화려하게 녹여낸 가장 심플하고 완벽한 오일 파스타입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 새우, 토마토 기반의 해산물 프루티 디 마레 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=800" alt="해산물 파스타">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">해산물 프루티 디 마레</span>
+                        <span class="menu-origin-name">Frutti di Mare</span>
+                        <p class="menu-desc">신선한 해산물을 가득 넣고 산뜻한 토마토 소스로 감싸 안은 바다 풍미 고스란히 담긴 요리입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 선명한 초록빛 바질 페스토와 잣 비주얼 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?q=80&w=800" alt="바질 페스토 파스타">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">제노베제 바질 페스토</span>
+                        <span class="menu-origin-name">Pesto alla Genovese</span>
+                        <p class="menu-desc">생바질과 잣, 파르미지아노 치즈를 으깨어 싱그러운 초록빛 자연의 향을 가득 담아낸 메뉴입니다.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= STEAK SECTION ================= -->
+        <section id="steak" class="category-section">
+            <h2 class="category-title">Steak</h2>
+            <div class="menu-grid">
+                
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 두툼한 티본 단면과 그릴 자국이 살아있는 피오렌티나 실물 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800" alt="티본 스테이크">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">피오렌티나 티본 스테이크</span>
+                        <span class="menu-origin-name">Bistecca alla Fiorentina</span>
+                        <p class="menu-desc">토스카나 정통 방식으로 구워 안심과 등심 두 부위의 풍부한 육즙을 동시에 즐기는 최고급 스테이크입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 얇게 슬라이스되어 루꼴라와 치즈가 덮인 탈리아타 정통 형태 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=800" alt="비프 탈리아타">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">비프 탈리아타</span>
+                        <span class="menu-origin-name">Tagliata di Manzo</span>
+                        <p class="menu-desc">시어링 후 얇게 썬 소고기 위에 신선한 루꼴라와 셰이브 파르미지아노 치즈를 곁들인 요리입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 버터 플레이크 감성의 바삭한 밀라네제 커틀릿 비주얼 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1599321955419-7f5307acbb8e?q=80&w=800" alt="밀라네제">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">코토레타 알라 밀라네제</span>
+                        <span class="menu-origin-name">Cotoletta alla Milanese</span>
+                        <p class="menu-desc">송아지 살코기를 바삭하게 황금빛으로 튀기듯 구워낸, 밀라노 스타일의 명품 커틀릿 스테이크입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 완벽한 그릴마크가 새겨진 안심 필레 미뇽 비주얼 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=800" alt="안심 스테이크">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">고르곤졸라 안심 필레</span>
+                        <span class="menu-origin-name">Filetto 고르곤졸라</span>
+                        <p class="menu-desc">가장 부드러운 안심 부위를 정밀하게 그릴링한 후, 진한 고르곤졸라 치즈 소스로 감칠맛을 더했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 소스에 푹 고아진 뼈가 붙은 이탈리안 정통 오소부코 찜 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?q=80&w=800" alt="오소부코">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">오소부코 밀라네제</span>
+                        <span class="menu-origin-name">Ossobuco alla Milanese</span>
+                        <p class="menu-desc">송아지 정강이 뼈 고기를 화이트 와인 스톡과 장시간 조려내 입안에서 부드럽게 녹아내리는 전통 찜입니다.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PIZZA SECTION ================= -->
+        <section id="pizza" class="category-section">
+            <h2 class="category-title">Pizza</h2>
+            <div class="menu-grid">
+                
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 생모짜렐라와 바질 잎이 든 완벽한 화덕 마르게리따 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?q=80&w=800" alt="마르게리따">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">마르게리따 피자</span>
+                        <span class="menu-origin-name">Pizza Margherita</span>
+                        <p class="menu-desc">토마토, 모짜렐라, 생바질잎으로 이탈리아 국기를 표현한 나폴리 정통 화덕 피자의 상징입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 매콤한 살라미 페페로니가 꽉 찬 디아볼라 매칭 완료 -->
+                        <img src="https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?q=80&w=800" alt="디아볼라">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">디아볼라 피자</span>
+                        <span class="menu-origin-name">Pizza Diavola</span>
+                        <p class="menu-desc">짭조름하고 매콤한 이탈리아식 살라미를 가득 얹어 화끈하고 중독성 있는 맛을 구현한 화덕 피자입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 고르곤졸라 등 노르스름한 치즈 본연의 콰트로 포르마지 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800" alt="콰트로 포르마지">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">콰트로 포르마지</span>
+                        <span class="menu-origin-name">Quattro Formaggi</span>
+                        <p class="menu-desc">모짜렐라, 고르곤졸라 등 이탈리아 대표 4가지 고급 치즈의 묵직하고 깊은 조화를 느끼는 피자입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 생 프로슈토 햄과 루꼴라가 신선하게 올라간 피자 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=800" alt="프로슈토 루꼴라">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">프로슈토 에 루꼴라</span>
+                        <span class="menu-origin-name">Prosciutto e Rucola</span>
+                        <p class="menu-desc">엄선된 숙성 생햄 프로슈토와 아삭하고 쌉싸름한 루꼴라를 아낌없이 올려 싱그러움을 강조한 피자입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 반으로 접힌 거대한 반달 만두 형태의 정통 칼초네 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800" alt="칼초네">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">정통 칼초네</span>
+                        <span class="menu-origin-name">Calzone</span>
+                        <p class="menu-desc">도우를 반으로 접어 초승달 모양을 만든 후 내부에 치즈와 햄을 채워 오븐에 구운 이색 피자입니다.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SALAD SECTION ================= -->
+        <section id="salad" class="category-section">
+            <h2 class="category-title">Salad</h2>
+            <div class="menu-grid">
+                
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 생모짜렐라 슬라이스와 토마토 링이 교차 배열된 정통 카프레제 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?q=80&w=800" alt="카프레제 샐러드">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">카프레제 샐러드</span>
+                        <span class="menu-origin-name">Insalata Caprese</span>
+                        <p class="menu-desc">토마토와 모짜렐라 치즈에 생바질 오일을 뿌려 재료 본연의 깔끔하고 상큼함을 극대화한 요리입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 로메인과 치즈가루, 크루통이 선명한 정통 시저 샐러드 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?q=80&w=800" alt="시저 샐러드">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">클래식 시저 샐러드</span>
+                        <span class="menu-origin-name">Caesar Salad</span>
+                        <p class="menu-desc">아삭한 로메인에 시저 드레싱을 버무린 후, 크루통과 파르메산 치즈 가루를 듬뿍 뿌린 베스트셀러입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 페타 치즈, 적양파, 올리브가 곁들여진 지중해식 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=800" alt="지중해식 올리브 샐러드">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">지중해식 올리브 샐러드</span>
+                        <span class="menu-origin-name">Mediterranean Salad</span>
+                        <p class="menu-desc">오이, 토마토, 블랙 올리브에 엑스트라 버진 올리브유와 페타 치즈를 얹은 지중해식 건강식입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 루꼴라 위에 커다란 하얀 부라타 치즈 주머니가 안착된 실물 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1623428187969-5da2dced5ebf?q=80&w=800" alt="부라타 치즈 샐러드">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">부라타 프로슈토 샐러드</span>
+                        <span class="menu-origin-name">Burrata con Prosciutto</span>
+                        <p class="menu-desc">부드러운 부라타 치즈 한 덩이와 짭조름한 프로슈토 햄, 와일드 루꼴라가 최고의 합을 이루는 메뉴입니다.</p>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="image-container">
+                        <!-- 이탈리아 전통 빵 조각과 토마토가 버무려진 판자넬라 실물 확인 완료 -->
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=800" alt="판자넬라">
+                    </div>
+                    <div class="card-body">
+                        <span class="menu-name">토스카나 판자넬라</span>
+                        <span class="menu-origin-name">Panzanella</span>
+                        <p class="menu-desc">바삭한 치아바타 빵 플래터 조각을 토마토 즙과 오일에 적셔 채소와 가볍게 즐기는 토스카나식 여름 샐러드입니다.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 IL TERRAZZO Gastronomy. All Verified Images via Unsplash. Designed for Ultimate Taste.</p>
+    </footer>
+
+</body>
+</html>

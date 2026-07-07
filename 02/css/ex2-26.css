@@ -1,0 +1,45 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+/* css 상속이란 상위요소에 적용한 속성값을 하위요소가 대물림 받는것
+font 설정관련 속성이 상속됨
+ */
+html {
+    color: gray;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 2;
+    border: 5px solid;
+}
+/* text-decoration, text-trandform */
+a{
+    text-decoration: line-through;
+    text-decoration: underline;
+    text-decoration: overline;
+    text-decoration: none;
+}
+p{
+    text-transform: uppercase;
+    text-transform: lowercase;
+    text-transform: capitalize;
+}
+/*첫번째 a태그 선택 */
+li:nth-child(1) a{
+ color: red;
+ /* x y blur color */
+ text-shadow: 12px 12px 20px #e91e63a3;
+}
+li:nth-child(2) a{
+ color: #ffffff;
+ text-shadow: 12px 12px 20px #8d3cb1e3;
+}
+p{
+    text-shadow: 1px 1px 1px #e91e63a3,2px 2px 
+    2px #00ff29;
+}
+/* generator, builder ,preset, cheatsheet */
+box-shadow: 0px 20px 25px -10px rgba(0, 0, 0, 0.2);
+background-color: rgba(255, 255, 255, 1);
+border-radius: 30px;

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini CLI 슬래시 명령어 가이드</title>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --bg-color: #f8f9fa;
+            --text-color: #202124;
+            --border-color: #dadce0;
+            --code-bg: #f1f3f4;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: var(--code-bg);
+            font-weight: bold;
+        }
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #d81b60;
+            font-weight: bold;
+        }
+        .description {
+            font-size: 0.95em;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #70757a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gemini CLI 슬래시 명령어 가이드</h1>
+        <p>Gemini CLI에서 사용할 수 있는 주요 슬래시 명령어 목록입니다. 명령어는 채팅 입력창에 <code>/</code>를 입력하여 실행할 수 있습니다.</p>
+
+        <h2>일반 및 도움말 (General & Help)</h2>
+        <table>
+            <tr><th>명령어</th><th>설명</th></tr>
+            <tr><td><code>/help</code> (또는 <code>/?</code>)</td><td>도움말 정보를 표시합니다. 사용 가능한 명령어와 사용법을 확인하세요.</td></tr>
+            <tr><td><code>/about</code></td><td>버전 정보를 표시합니다. 문제 보고 시 유용합니다.</td></tr>
+            <tr><td><code>/docs</code></td><td>브라우저에서 Gemini CLI 공식 문서를 엽니다.</td></tr>
+            <tr><td><code>/bug &lt;제목&gt;</code></td><td>GitHub에 Gemini CLI 관련 이슈를 생성합니다.</td></tr>
+            <tr><td><code>/privacy</code></td><td>개인정보 보호 고지 및 데이터 수집 동의 옵션을 표시합니다.</td></tr>
+            <tr><td><code>/quit</code> (또는 <code>/exit</code>)</td><td>CLI를 종료합니다. <code>--delete</code> 옵션으로 기록을 삭제할 수 있습니다.</td></tr>
+        </table>
+
+        <h2>세션 및 컨텍스트 관리 (Session & Context)</h2>
+        <table>
+            <tr><th>명령어</th><th>설명</th></tr>
+            <tr><td><code>/resume</code> (alias: <code>/chat</code>)</td><td>이전 세션을 탐색하고 다시 시작하거나 체크포인트를 관리합니다.</td></tr>
+            <tr><td><code>/rewind</code></td><td>대화 기록을 되돌려 상호작용을 검토하거나 변경 사항을 취소합니다.</td></tr>
+            <tr><td><code>/restore [tool_id]</code></td><td>특정 도구 실행 전의 상태로 프로젝트 파일을 복원합니다.</td></tr>
+            <tr><td><code>/clear</code></td><td>터미널 화면과 표시된 세션 기록을 지웁니다.</td></tr>
+            <tr><td><code>/compress</code></td><td>채팅 컨텍스트를 요약으로 교체하여 토큰을 절약합니다.</td></tr>
+            <tr><td><code>/memory</code></td><td><code>GEMINI.md</code> 파일의 지침 컨텍스트를 관리합니다.</td></tr>
+            <tr><td><code>/stats</code></td><td>세션, 모델 또는 도구 사용 통계를 보여줍니다.</td></tr>
+        </table>
+
+        <h2>설정 및 사용자 정의 (Settings)</h2>
+        <table>
+            <tr><th>명령어</th><th>설명</th></tr>
+            <tr><td><code>/settings</code></td><td>대화형 설정 편집기를 엽니다.</td></tr>
+            <tr><td><code>/theme</code></td><td>시각적 테마를 변경하는 대화창을 엽니다.</td></tr>
+            <tr><td><code>/model</code></td><td>모델 구성을 관리합니다 (예: <code>/model set &lt;name&gt;</code>).</td></tr>
+            <tr><td><code>/auth</code></td><td>인증 방식을 변경하는 대화창을 엽니다.</td></tr>
+            <tr><td><code>/editor</code></td><td>파일 작업에 사용할 기본 에디터를 선택합니다.</td></tr>
+            <tr><td><code>/vim</code></td><td>Vim 스타일의 내비게이션 및 편집 모드를 토글합니다.</td></tr>
+        </table>
+
+        <h2>워크스페이스 및 도구 (Workspace & Tools)</h2>
+        <table>
+            <tr><th>명령어</th><th>설명</th></tr>
+            <tr><td><code>/dir</code> (또는 <code>/directory</code>)</td><td>워크스페이스 디렉토리를 관리합니다.</td></tr>
+            <tr><td><code>/tools</code></td><td>사용 가능한 도구 목록을 보여줍니다.</td></tr>
+            <tr><td><code>/mcp</code></td><td>Model Context Protocol (MCP) 서버를 관리합니다.</td></tr>
+            <tr><td><code>/skills</code></td><td>에이전트 스킬(전문 지식)을 관리합니다.</td></tr>
+            <tr><td><code>/agents</code></td><td>로컬 및 원격 서브 에이전트를 관리합니다.</td></tr>
+            <tr><td><code>/plan</code></td><td>계획 모드(Plan Mode)로 전환하거나 현재 계획을 확인합니다.</td></tr>
+        </table>
+
+        <h2>기타 유용한 기능 (Advanced)</h2>
+        <table>
+            <tr><th>명령어</th><th>설명</th></tr>
+            <tr><td><code>/init</code></td><td>현재 프로젝트에 최적화된 <code>GEMINI.md</code> 파일을 생성합니다.</td></tr>
+            <tr><td><code>/copy</code></td><td>마지막 CLI 출력을 클립보드에 복사합니다.</td></tr>
+            <tr><td><code>/upgrade</code></td><td>사용량 제한 상향을 위한 업그레이드 페이지를 엽니다.</td></tr>
+            <tr><td><code>/shells</code></td><td>백그라운드에서 실행 중인 셸 프로세스 뷰를 토글합니다.</td></tr>
+        </table>
+
+        <footer>
+            <p>Gemini CLI Documentation &copy; 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

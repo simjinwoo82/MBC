@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.home-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #fbc02d 14.9%, #7b1fa2 77.4%);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.subtract-icon {
+    position: absolute;
+    width: 211.4px;
+    height: 211.44px;
+    left: 96px;
+    top: 21px;
+}
+
+.subtract-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.title-text {
+    position: absolute;
+    left: 111px;
+    top: 220px;
+    font-size: 50px;
+    font-weight: 700;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.image-wrapper {
+    position: absolute;
+    left: 54px;
+    top: 293px;
+    width: 295px;
+    height: 288px;
+}
+
+.photo, .effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.photo img {
+    width: 108.14%; /* Figma inset 보정 */
+    height: 108.33%;
+    margin-left: -4.07%;
+    margin-top: -4.17%;
+}
+
+.effect img {
+    width: 100.68%;
+    height: 100.7%;
+    margin-left: -0.34%;
+    margin-top: -0.35%;
+}
+
+.description-link {
+    position: absolute;
+    left: 57px;
+    top: 670px;
+    width: 270px;
+    height: 152px;
+    text-decoration: none;
+    color: #000000;
+    overflow: hidden;
+    display: block;
+}
+
+.description-link p {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 35px;
+    word-break: break-word;
+    cursor: pointer;
+}
