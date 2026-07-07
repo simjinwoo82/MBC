@@ -97,7 +97,41 @@
         <p>전체 HTML 파일 수: 약 177개 (상대경로로 개별 페이지에 접근 가능합니다).</p>
       </section>
 
-      <hr />
+        <section>
+          <h2>전체 페이지 목록</h2>
+          <p><button id="loadList">전체 HTML 파일 불러오기</button> <small id="listCount"></small></p>
+          <div id="fileList" style="max-height:400px; overflow:auto; border:1px solid #ccc; padding:10px;"></div>
+          <script>
+            document.getElementById('loadList').addEventListener('click', async ()=>{
+              const res = await fetch('./file_list.txt');
+              const buf = await res.arrayBuffer();
+              let text;
+              // UTF-16 LE BOM detection
+              const view = new Uint8Array(buf,0,2);
+              if (view[0]===0xff && view[1]===0xfe) {
+                text = new TextDecoder('utf-16le').decode(buf);
+              } else if (view[0]===0xfe && view[1]===0xff) {
+                text = new TextDecoder('utf-16be').decode(buf);
+              } else {
+                text = new TextDecoder('utf-8').decode(buf);
+              }
+              const lines = text.split(/\r?\n/).filter(Boolean);
+              document.getElementById('listCount').textContent = lines.length + '개';
+              const container = document.getElementById('fileList');
+              container.innerHTML = '';
+              lines.forEach(p=>{
+                const a = document.createElement('a');
+                a.href = './' + p.replace(/\\\\/g,'/').replace(/^\./,'').replace(/^\//,'');
+                a.textContent = p;
+                a.className = 't1';
+                a.style.display='block';
+                container.appendChild(a);
+              });
+            });
+          </script>
+        </section>
+
+        <hr />
 
       <section>
         <h2>갤러리 및 QR코드</h2>
